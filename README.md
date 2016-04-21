@@ -62,7 +62,7 @@ Before:
 
 ```js
 FbApi("/me/feed", function (post) {
-  FbApi(posts[i].id + "/comments?fields=from,message,created_time&filter=stream", function (comment) {
+  FbApi(post.id + "/comments?fields=from,message,created_time&filter=stream", function (comment) {
     console.log(comment);
   });
 });
