@@ -31,7 +31,7 @@ function FbApi(next) {
 After:
 
 ```js
-rxFbApi("/me/feed").subscribe(function (post) {
+RxFacebookApi("/me/feed").subscribe(function (post) {
   console.log(post);
 });
 ```
@@ -39,7 +39,7 @@ rxFbApi("/me/feed").subscribe(function (post) {
 ### get 3 posts of my all posts:
 
 ```js
-rxFbApi("/me/feed").take(3).subscribe(function (post) {
+RxFacebookApi("/me/feed").take(3).subscribe(function (post) {
   console.log(post);
 });
 ```
@@ -64,8 +64,8 @@ for (var i = 0; i < comments.length; i++) {
 After:
 
 ```js
-rxFbApi("/me/feed").flatMap(function (post) {
-  return rxFbApi(post.id + "/comments?fields=from,message,created_time&filter=stream"));
+RxFacebookApi("/me/feed").flatMap(function (post) {
+  return RxFacebookApi(post.id + "/comments?fields=from,message,created_time&filter=stream"));
 }).subscribe(function (comment) {
   console.log(comment);
 });
