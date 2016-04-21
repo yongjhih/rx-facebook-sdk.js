@@ -4,12 +4,16 @@ rxjs for facebook
 
 ## Usage
 
-get my all posts:
+### get my all posts:
 
 Before:
 
 ```js
 var posts = FbApi("/me/feed");
+
+for (var i = 0; i < posts.length; i++) {
+  console.log(posts[i]);
+}
 
 function FbApi(next) {
     FB.api("/me/feed", function (response) {
@@ -32,7 +36,7 @@ rxFbApi("/me/feed").subscribe(function (post) {
 });
 ```
 
-get 3 posts of my all posts:
+### get 3 posts of my all posts:
 
 ```js
 rxFbApi("/me/feed").take(3).subscribe(function (post) {
@@ -40,7 +44,24 @@ rxFbApi("/me/feed").take(3).subscribe(function (post) {
 });
 ```
 
-get comments of my posts:
+### get comments of my posts:
+
+Before:
+
+```js
+var posts = FbApi("/me/feed");
+var comments = new Array();
+
+for (var i = 0; i < posts.length; i++) {
+    comments.concat(FbApi(posts[i].id + "/comments?fields=from,message,created_time&filter=stream"));
+}
+
+for (var i = 0; i < comments.length; i++) {
+  console.log(comments[i]);
+}
+```
+
+After:
 
 ```js
 rxFbApi("/me/feed").flatMap(function (post) {
