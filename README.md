@@ -16,7 +16,8 @@ FbApi("/me/feed", function (post) {
 function FbApi(next, func) {
   FB.api("/me/feed", function (response) {
     for (it in response.data) {
-      func(it);
+      var predicate = func(it);
+      if (predicate) return;
     }
     if (response.paging && response.paging.next) {
       FbApi(response.paging.next, func);
@@ -34,6 +35,20 @@ RxFacebookApi("/me/feed").subscribe(function (post) {
 ```
 
 ### get 3 posts of my all posts:
+
+Before:
+
+```js
+var i = 0;
+FbApi("/me/feed", function (post) {
+  if (i > 3) return true;
+  i++;
+  console.log(post);
+  return false;
+});
+```
+
+After:
 
 ```js
 RxFacebookApi("/me/feed").take(3).subscribe(function (post) {
