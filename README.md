@@ -9,22 +9,19 @@ rxjs for facebook
 Before:
 
 ```js
-var posts = FbApi("/me/feed");
+FbApi("/me/feed", function (post) {
+  console.log(post);
+});
 
-for (var i = 0; i < posts.length; i++) {
-  console.log(posts[i]);
-}
-
-function FbApi(next) {
-    FB.api("/me/feed", function (response) {
-        var posts = new Array();
-        if (response.paging && response.paging.next) {
-            posts.concat(FbApi(response.paging.next));
-        } else {
-            posts.concat(response.data);
-        }
-        return posts;
+function FbApi(next, func) {
+  FB.api("/me/feed", function (response) {
+    for (it in response.data) {
+      func(it);
     }
+    if (response.paging && response.paging.next) {
+      FbApi(response.paging.next, func);
+    }
+  }
 }
 ```
 
@@ -49,16 +46,11 @@ RxFacebookApi("/me/feed").take(3).subscribe(function (post) {
 Before:
 
 ```js
-var posts = FbApi("/me/feed");
-var comments = new Array();
-
-for (var i = 0; i < posts.length; i++) {
-    comments.concat(FbApi(posts[i].id + "/comments?fields=from,message,created_time&filter=stream"));
-}
-
-for (var i = 0; i < comments.length; i++) {
-  console.log(comments[i]);
-}
+FbApi("/me/feed", function (post) {
+  FbApi(posts[i].id + "/comments?fields=from,message,created_time&filter=stream", function (comment) {
+    console.log(comment);
+  });
+});
 ```
 
 After:
