@@ -15,7 +15,7 @@ FbApi("/me/feed", function (post) {
 
 function FbApi(next, func) {
   FB.api("/me/feed", function (response) {
-    for (it in response.data) {
+    for (var it in response.data) {
       var predicate = func(it);
       if (predicate) return;
     }
