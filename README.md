@@ -6,6 +6,26 @@ rxjs for facebook
 
 get my all posts:
 
+Before:
+
+```js
+var posts = FbApi("/me/feed");
+
+function FbApi(next) {
+    FB.api("/me/feed", function (response) {
+        var posts = new Array();
+        if (response.paging && response.paging.next) {
+            posts.concat(FbApi(response.paging.next));
+        } else {
+            posts.concat(response.data);
+        }
+        return posts;
+    }
+}
+```
+
+After:
+
 ```js
 rxFbApi("/me/feed").subscribe(function (post) {
   console.log(post);
