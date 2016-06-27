@@ -16,8 +16,7 @@ FbApi("/me/feed", function (post) {
 function FbApi(next, func) {
   FB.api("/me/feed", function (response) {
     for (var it in response.data) {
-      var predicate = func(it);
-      if (predicate) return;
+      if (func(it)) return; // predicate
     }
     if (response.paging && response.paging.next) {
       FbApi(response.paging.next, func);
