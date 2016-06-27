@@ -2,7 +2,7 @@
   "name": "rx-facebook-sdk",
   "version": "0.0.1",
   "description": "Rx Facebook SDK",
-  "main": "index.js",
+  "main": "rx-facebook-sdk.js",
   "author": "Andrew Chen",
   "license": "MIT",
   "repository": {
@@ -33,10 +33,6 @@
     "babel-loader": ""
   },
   "scripts": {
-    "start": "node index.js",
-    "repos": "node repos.js",
-    "test": "mocha test/test.js",
-    "report": "istanbul cover _mocha -- -R spec test/test.js",
-    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec test/test.js && cat ./coverage/lcov.info | coveralls"
+    "start": "node index.js"
   }
 }

@@ -1,4 +1,4 @@
-# rx-facebook.js
+# rx-facebook-sdk.js
 
 rxjs for facebook
 
@@ -82,5 +82,23 @@ RxFacebookApi("/me/feed").flatMap(function (post) {
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
-<script src="rx-facebook.js"></script>
+<script src="rx-facebook-sdk.js"></script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 'your-app-id',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 ```
