@@ -1,0 +1,42 @@
+{
+  "name": "rx-facebook-sdk",
+  "version": "0.0.1",
+  "description": "Rx Facebook SDK",
+  "main": "index.js",
+  "author": "Andrew Chen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yongjhih/rx-facebook-sdk.js.git"
+  },
+  "keywords": [
+    "facebook",
+    "rx"
+  ],
+  "bugs": {
+    "url": "https://github.com/yongjhih/rx-facebook-sdk.js/issues"
+  },
+  "homepage": "https://github.com/yongjhih/rx-facebook-sdk.js",
+  "devDependencies": {
+    "js-beautify": "~1.5.0",
+    "chai": "1.10.0",
+    "jshint": "2.8.0",
+    "mocha": "2.1.0",
+    "nock": "^0.56.0",
+    "lintspaces-cli": "^0.1.1",
+    "istanbul": "",
+    "coveralls": "^2.11.2",
+    "isomorphic-fetch": "",
+    "es6-promise": "",
+    "rx": "",
+    "babel-core": "",
+    "babel-loader": ""
+  },
+  "scripts": {
+    "start": "node index.js",
+    "repos": "node repos.js",
+    "test": "mocha test/test.js",
+    "report": "istanbul cover _mocha -- -R spec test/test.js",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec test/test.js && cat ./coverage/lcov.info | coveralls"
+  }
+}
